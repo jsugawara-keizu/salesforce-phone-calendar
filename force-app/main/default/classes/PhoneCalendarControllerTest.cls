@@ -139,7 +139,7 @@ private class PhoneCalendarControllerTest {
   @isTest
   static void getEventsForMonth_returnsEventsInRange() {
     Date start = Date.today();
-    Date end = start.addDays(6);
+    Date rangeEnd = start.addDays(6);
 
     Event inRange = new Event(
       Subject = 'In Range',
@@ -152,7 +152,7 @@ private class PhoneCalendarControllerTest {
     Event outOfRange = new Event(
       Subject = 'Out of Range',
       ActivityDateTime = Datetime.newInstance(
-        end.addDays(2),
+        rangeEnd.addDays(2),
         Time.newInstance(9, 0, 0, 0)
       ),
       DurationInMinutes = 60
@@ -162,7 +162,7 @@ private class PhoneCalendarControllerTest {
     Test.startTest();
     List<Event> result = PhoneCalendarController.getEventsForMonth(
       String.valueOf(start),
-      String.valueOf(end),
+      String.valueOf(rangeEnd),
       new List<Id>{ UserInfo.getUserId() }
     );
     Test.stopTest();
@@ -229,7 +229,7 @@ private class PhoneCalendarControllerTest {
     insert other;
 
     Date start = Date.today();
-    Date end = start.addDays(6);
+    Date rangeEnd = start.addDays(6);
     Datetime slot = Datetime.newInstance(
       start.addDays(1),
       Time.newInstance(10, 0, 0, 0)
@@ -255,7 +255,7 @@ private class PhoneCalendarControllerTest {
     Test.startTest();
     List<Event> result = PhoneCalendarController.getEventsForMonth(
       String.valueOf(start),
-      String.valueOf(end),
+      String.valueOf(rangeEnd),
       new List<Id>{ UserInfo.getUserId() }
     );
     Test.stopTest();
