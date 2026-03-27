@@ -622,7 +622,9 @@ export default class PhoneCalendar extends NavigationMixin(LightningElement) {
           isSelected,
           isDisabled,
           typeLabel:
-            c.Type === "R" ? this.label.typeResource : this.label.typePublic,
+            c.Type === "Resource"
+              ? this.label.typeResource
+              : this.label.typePublic,
           colorDotStyle: `background-color: ${USER_COLORS[colorIdx % USER_COLORS.length].border};`,
           rowClass: `user-row${isSelected ? " user-row_selected" : ""}${isDisabled ? " user-row_disabled" : ""}`
         };
