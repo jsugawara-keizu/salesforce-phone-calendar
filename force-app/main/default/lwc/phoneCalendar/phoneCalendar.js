@@ -182,6 +182,10 @@ export default class PhoneCalendar extends NavigationMixin(LightningElement) {
   @wire(CurrentPageReference)
   wiredPageRef() {
     if (this._initialLoadDone) {
+      this.showDayPanel = false;
+      this.dayPanelExpanded = false;
+      this.showUserPanel = false;
+      this.userPanelExpanded = false;
       this.loadEvents();
     }
   }
@@ -1099,6 +1103,9 @@ export default class PhoneCalendar extends NavigationMixin(LightningElement) {
 
   handleEventClick(event) {
     const recordId = event.currentTarget.dataset.id;
+    this.showDayPanel = false;
+    this.dayPanelExpanded = false;
+    this.showUserPanel = false;
     this[NavigationMixin.Navigate]({
       type: "standard__recordPage",
       attributes: { recordId, objectApiName: "Event", actionName: "view" }
