@@ -140,4 +140,20 @@
         <name>PhoneCal_NoPermission</name>
         <label>You don't have permission to use this component.</label>
     </customLabels>
+    <customLabels>
+        <name>PhoneCal_WorkEndHour</name>
+        <label>Work End Hour</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_WorkEndHourDesc</name>
+        <label>End hour for off-hours background shading (0–23)</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_WorkStartHour</name>
+        <label>Work Start Hour</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_WorkStartHourDesc</name>
+        <label>Start hour for off-hours background shading (0–23)</label>
+    </customLabels>
 </Translations>

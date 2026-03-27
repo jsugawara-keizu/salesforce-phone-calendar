@@ -250,4 +250,36 @@
         <shortDescription>No permission message</shortDescription>
         <value>権限がありません</value>
     </labels>
+    <labels>
+        <fullName>PhoneCal_WorkEndHour</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription
+    >App Builder property label: work end hour</shortDescription>
+        <value>終業時刻（時）</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_WorkEndHourDesc</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription
+    >App Builder property description: work end hour</shortDescription>
+        <value>業務時間外の背景色を適用する終了時刻（0〜23）</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_WorkStartHour</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription
+    >App Builder property label: work start hour</shortDescription>
+        <value>始業時刻（時）</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_WorkStartHourDesc</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription
+    >App Builder property description: work start hour</shortDescription>
+        <value>業務時間外の背景色を適用する開始時刻（0〜23）</value>
+    </labels>
 </CustomLabels>
