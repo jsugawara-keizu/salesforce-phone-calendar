@@ -4,6 +4,10 @@
   >PhoneCalendar LWC を使用するために必要な権限を付与します。</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>PhoneCalendar User</label>
+    <customPermissions>
+        <enabled>true</enabled>
+        <name>UsePhoneCalendar</name>
+    </customPermissions>
     <classAccesses>
         <apexClass>PhoneCalendarController</apexClass>
         <enabled>true</enabled>

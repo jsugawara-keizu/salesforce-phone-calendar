@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customLabels>
         <name>PhoneCal_AgendaSuffix</name>
@@ -135,5 +135,9 @@
     <customLabels>
         <name>PhoneCal_ViewMonth</name>
         <label>Month</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_NoPermission</name>
+        <label>You don't have permission to use this component.</label>
     </customLabels>
 </Translations>

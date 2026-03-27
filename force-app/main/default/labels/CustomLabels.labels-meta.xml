@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
         <fullName>PhoneCal_AgendaSuffix</fullName>
@@ -32,7 +32,8 @@
         <fullName>PhoneCal_DateRangeSep</fullName>
         <language>ja</language>
         <protected>false</protected>
-        <shortDescription>Date range separator for 3-day header</shortDescription>
+        <shortDescription
+    >Date range separator for 3-day header</shortDescription>
         <value> 〜 </value>
     </labels>
     <labels>
@@ -102,7 +103,8 @@
         <fullName>PhoneCal_NextPeriod</fullName>
         <language>ja</language>
         <protected>false</protected>
-        <shortDescription>Next period navigation button aria-label</shortDescription>
+        <shortDescription
+    >Next period navigation button aria-label</shortDescription>
         <value>次へ</value>
     </labels>
     <labels>
@@ -130,7 +132,8 @@
         <fullName>PhoneCal_PrevPeriod</fullName>
         <language>ja</language>
         <protected>false</protected>
-        <shortDescription>Previous period navigation button aria-label</shortDescription>
+        <shortDescription
+    >Previous period navigation button aria-label</shortDescription>
         <value>前へ</value>
     </labels>
     <labels>
@@ -144,7 +147,8 @@
         <fullName>PhoneCal_SectionPublicResource</fullName>
         <language>ja</language>
         <protected>false</protected>
-        <shortDescription>Public and resource calendar section header</shortDescription>
+        <shortDescription
+    >Public and resource calendar section header</shortDescription>
         <value>公開＆リソース</value>
     </labels>
     <labels>
@@ -158,7 +162,8 @@
         <fullName>PhoneCal_SelectedSuffix</fullName>
         <language>ja</language>
         <protected>false</protected>
-        <shortDescription>Selection count suffix in user panel</shortDescription>
+        <shortDescription
+    >Selection count suffix in user panel</shortDescription>
         <value>件選択中</value>
     </labels>
     <labels>
@@ -237,5 +242,12 @@
         <protected>false</protected>
         <shortDescription>Month view mode button label</shortDescription>
         <value>月</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_NoPermission</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>No permission message</shortDescription>
+        <value>権限がありません</value>
     </labels>
 </CustomLabels>

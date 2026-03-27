@@ -1,395 +1,559 @@
 <template>
-    <div class="calendar-root"
-         ontouchstart={handleTouchStart}
-         ontouchend={handleTouchEnd}>
+  <template if:false={hasPermission}>
+    <div class="no-permission">
+      <p>{label.noPermission}</p>
+    </div>
+  </template>
+  <template if:true={hasPermission}>
+    <div
+      class="calendar-root"
+      ontouchstart={handleTouchStart}
+      ontouchend={handleTouchEnd}
+    >
+      <!-- ===== Compact Header ===== -->
+      <div class="cal-header slds-grid slds-grid_vertical-align-center">
+        <button
+          class="header-icon-btn"
+          aria-label={label.prevPeriod}
+          onclick={handlePrevPeriod}
+        >
+          <lightning-icon
+            icon-name="utility:chevronleft"
+            size="x-small"
+            variant="inverse"
+            class="header-btn-icon"
+          ></lightning-icon>
+        </button>
 
-        <!-- ===== Compact Header ===== -->
-        <div class="cal-header slds-grid slds-grid_vertical-align-center">
-            <button class="header-icon-btn" aria-label={label.prevPeriod} onclick={handlePrevPeriod}>
-                <lightning-icon icon-name="utility:chevronleft" size="x-small" variant="inverse" class="header-btn-icon"></lightning-icon>
-            </button>
+        <button class="period-btn slds-col" onclick={handleViewModeMenuOpen}>
+          <span class="period-label">{periodLabel}</span>
+          <span class="view-mode-badge">{viewModeLabel} ▾</span>
+        </button>
 
-            <button class="period-btn slds-col" onclick={handleViewModeMenuOpen}>
-                <span class="period-label">{periodLabel}</span>
-                <span class="view-mode-badge">{viewModeLabel} ▾</span>
-            </button>
+        <button
+          class="header-icon-btn"
+          aria-label={label.nextPeriod}
+          onclick={handleNextPeriod}
+        >
+          <lightning-icon
+            icon-name="utility:chevronright"
+            size="x-small"
+            variant="inverse"
+            class="header-btn-icon"
+          ></lightning-icon>
+        </button>
 
-            <button class="header-icon-btn" aria-label={label.nextPeriod} onclick={handleNextPeriod}>
-                <lightning-icon icon-name="utility:chevronright" size="x-small" variant="inverse" class="header-btn-icon"></lightning-icon>
-            </button>
+        <button class="today-btn" onclick={handleTodayClick}>
+          {label.today}
+        </button>
 
-            <button class="today-btn" onclick={handleTodayClick}>{label.today}</button>
+        <button
+          class="header-icon-btn"
+          aria-label={label.userSelectAriaLabel}
+          onclick={handleOpenUserPanel}
+        >
+          <lightning-icon
+            icon-name="utility:people"
+            size="x-small"
+            variant="inverse"
+            class="header-btn-icon"
+          ></lightning-icon>
+        </button>
+      </div>
 
-            <button class="header-icon-btn" aria-label={label.userSelectAriaLabel} onclick={handleOpenUserPanel}>
-                <lightning-icon icon-name="utility:people" size="x-small" variant="inverse" class="header-btn-icon"></lightning-icon>
-            </button>
+      <!-- ===== Month View ===== -->
+      <template if:true={isMonthView}>
+        <div class="slds-grid cal-dow-header">
+          <template for:each={dayOfWeekLabels} for:item="dow">
+            <div key={dow.id} class="slds-col dow-label">{dow.label}</div>
+          </template>
         </div>
-
-        <!-- ===== Month View ===== -->
-        <template if:true={isMonthView}>
-            <div class="slds-grid cal-dow-header">
-                <template for:each={dayOfWeekLabels} for:item="dow">
-                    <div key={dow.id} class="slds-col dow-label">{dow.label}</div>
-                </template>
-            </div>
-            <div class="calendar-grid">
-                <template for:each={calendarWeeks} for:item="week">
-                    <div key={week.id} class="slds-grid calendar-row">
-                        <template for:each={week.days} for:item="day">
-                            <div key={day.id}
-                                 class={day.cellClass}
-                                 data-date={day.dateStr}
-                                 onclick={handleDayClick}>
-                                <span class={day.labelClass}>{day.dayNumber}</span>
-                                <div class="event-dots">
-                                    <template for:each={day.eventDots} for:item="dot">
-                                        <span key={dot.id} class="event-dot" style={dot.dotStyle}></span>
-                                    </template>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </template>
-            </div>
-        </template>
-
-        <!-- ===== Day View ===== -->
-        <template if:true={isDayView}>
-            <template if:true={hasDayViewAllDayEvents}>
-                <div class="allday-bar">
-                    <span class="allday-label">{label.allDay}</span>
-                    <div class="allday-events">
-                        <template for:each={dayViewAllDayEvents} for:item="evt">
-                            <div key={evt.Id}
-                                 class="allday-event"
-                                 role="button"
-                                 tabindex="0"
-                                 data-id={evt.Id}
-                                 onclick={handleEventClick}>
-                                {evt.Subject}
-                            </div>
-                        </template>
-                    </div>
+        <div class="calendar-grid">
+          <template for:each={calendarWeeks} for:item="week">
+            <div key={week.id} class="slds-grid calendar-row">
+              <template for:each={week.days} for:item="day">
+                <div
+                  key={day.id}
+                  class={day.cellClass}
+                  data-date={day.dateStr}
+                  onclick={handleDayClick}
+                >
+                  <span class={day.labelClass}>{day.dayNumber}</span>
+                  <div class="event-dots">
+                    <template for:each={day.eventDots} for:item="dot">
+                      <span
+                        key={dot.id}
+                        class="event-dot"
+                        style={dot.dotStyle}
+                      ></span>
+                    </template>
+                  </div>
                 </div>
+              </template>
+            </div>
+          </template>
+        </div>
+      </template>
+
+      <!-- ===== Day View ===== -->
+      <template if:true={isDayView}>
+        <template if:true={hasDayViewAllDayEvents}>
+          <div class="allday-bar">
+            <span class="allday-label">{label.allDay}</span>
+            <div class="allday-events">
+              <template for:each={dayViewAllDayEvents} for:item="evt">
+                <div
+                  key={evt.Id}
+                  class="allday-event"
+                  role="button"
+                  tabindex="0"
+                  data-id={evt.Id}
+                  onclick={handleEventClick}
+                >
+                  {evt.Subject}
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+        <div class="time-grid-scroll">
+          <div class="time-grid-layout">
+            <div class="hour-gutter">
+              <template for:each={hourLineItems} for:item="hl">
+                <div key={hl.id} class="hour-tick" style={hl.topStyle}>
+                  <span class="hour-label">{hl.label}</span>
+                </div>
+              </template>
+            </div>
+            <div class="events-col" style={eventsColStyle}>
+              <template if:true={showCurrentTimeInDay}>
+                <div
+                  class="current-time-line"
+                  style={currentTimeLineStyle}
+                ></div>
+              </template>
+              <template for:each={dayViewEvents} for:item="evt">
+                <div
+                  key={evt.Id}
+                  class="te-event"
+                  style={evt.positionStyle}
+                  role="button"
+                  tabindex="0"
+                  data-id={evt.Id}
+                  onclick={handleEventClick}
+                >
+                  <span class="te-event-time">{evt.timeLabel}</span>
+                  <span class="te-event-subject">{evt.Subject}</span>
+                  <template if:true={evt.showMeta}>
+                    <span class="te-event-duration">{evt.durationLabel}</span>
+                  </template>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <!-- ===== 3-Day View ===== -->
+      <template if:true={is3DayView}>
+        <div class="three-day-container">
+          <div class="three-day-header slds-grid">
+            <div class="time-gutter-header"></div>
+            <template for:each={threeDayDateHeaders} for:item="header">
+              <div key={header.id} class={header.headerClass}>
+                <span class="date-col-dow">{header.dow}</span>
+                <span class={header.dayClass}>{header.day}</span>
+              </div>
             </template>
-            <div class="time-grid-scroll">
-                <div class="time-grid-layout">
-                    <div class="hour-gutter">
-                        <template for:each={hourLineItems} for:item="hl">
-                            <div key={hl.id} class="hour-tick" style={hl.topStyle}>
-                                <span class="hour-label">{hl.label}</span>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="events-col" style={eventsColStyle}>
-                        <template if:true={showCurrentTimeInDay}>
-                            <div class="current-time-line" style={currentTimeLineStyle}></div>
-                        </template>
-                        <template for:each={dayViewEvents} for:item="evt">
-                            <div key={evt.Id}
-                                 class="te-event"
-                                 style={evt.positionStyle}
-                                 role="button"
-                                 tabindex="0"
-                                 data-id={evt.Id}
-                                 onclick={handleEventClick}>
-                                <span class="te-event-time">{evt.timeLabel}</span>
-                                <span class="te-event-subject">{evt.Subject}</span>
-                                <template if:true={evt.showMeta}>
-                                    <span class="te-event-duration">{evt.durationLabel}</span>
-                                </template>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </div>
-        </template>
-
-        <!-- ===== 3-Day View ===== -->
-        <template if:true={is3DayView}>
-            <div class="three-day-container">
-                <div class="three-day-header slds-grid">
-                    <div class="time-gutter-header"></div>
-                    <template for:each={threeDayDateHeaders} for:item="header">
-                        <div key={header.id} class={header.headerClass}>
-                            <span class="date-col-dow">{header.dow}</span>
-                            <span class={header.dayClass}>{header.day}</span>
-                        </div>
-                    </template>
-                </div>
-                <div class="time-grid-scroll">
-                    <div class="time-grid-layout">
-                        <div class="hour-gutter">
-                            <template for:each={hourLineItems} for:item="hl">
-                                <div key={hl.id} class="hour-tick" style={hl.topStyle}>
-                                    <span class="hour-label">{hl.label}</span>
-                                </div>
-                            </template>
-                        </div>
-                        <div class="events-col" style={eventsColStyle}>
-                            <template if:true={showCurrentTimeInCol0}>
-                                <div class="current-time-line" style={currentTimeLineStyle}></div>
-                            </template>
-                            <template for:each={threeDayEventsCol0} for:item="evt">
-                                <div key={evt.Id}
-                                     class="te-event"
-                                     style={evt.positionStyle}
-                                     role="button"
-                                     tabindex="0"
-                                     data-id={evt.Id}
-                                     onclick={handleEventClick}>
-                                    <span class="te-event-subject">{evt.Subject}</span>
-                                </div>
-                            </template>
-                        </div>
-                        <div class="events-col" style={eventsColStyle}>
-                            <template if:true={showCurrentTimeInCol1}>
-                                <div class="current-time-line" style={currentTimeLineStyle}></div>
-                            </template>
-                            <template for:each={threeDayEventsCol1} for:item="evt">
-                                <div key={evt.Id}
-                                     class="te-event"
-                                     style={evt.positionStyle}
-                                     role="button"
-                                     tabindex="0"
-                                     data-id={evt.Id}
-                                     onclick={handleEventClick}>
-                                    <span class="te-event-subject">{evt.Subject}</span>
-                                </div>
-                            </template>
-                        </div>
-                        <div class="events-col" style={eventsColStyle}>
-                            <template if:true={showCurrentTimeInCol2}>
-                                <div class="current-time-line" style={currentTimeLineStyle}></div>
-                            </template>
-                            <template for:each={threeDayEventsCol2} for:item="evt">
-                                <div key={evt.Id}
-                                     class="te-event"
-                                     style={evt.positionStyle}
-                                     role="button"
-                                     tabindex="0"
-                                     data-id={evt.Id}
-                                     onclick={handleEventClick}>
-                                    <span class="te-event-subject">{evt.Subject}</span>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </template>
-
-        <!-- ===== Agenda View ===== -->
-        <template if:true={isAgendaView}>
-            <div class="agenda-scroll">
-                <template if:true={hasAgendaGroups}>
-                    <template for:each={agendaGroups} for:item="group">
-                        <div key={group.id}>
-                            <div class={group.headerClass}>{group.label}</div>
-                            <template for:each={group.events} for:item="evt">
-                                <div key={evt.Id}
-                                     class="agenda-event"
-                                     role="button"
-                                     tabindex="0"
-                                     data-id={evt.Id}
-                                     onclick={handleEventClick}>
-                                    <div class="agenda-event-color-bar" style={evt.colorBarStyle}></div>
-                                    <div class="agenda-event-time">{evt.timeLabel}</div>
-                                    <div class="agenda-event-body">
-                                        <p class="slds-text-body_regular slds-truncate">{evt.Subject}</p>
-                                        <template if:true={evt.Location}>
-                                            <p class="slds-text-body_small slds-text-color_weak slds-truncate">{evt.Location}</p>
-                                        </template>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </template>
+          </div>
+          <div class="time-grid-scroll">
+            <div class="time-grid-layout">
+              <div class="hour-gutter">
+                <template for:each={hourLineItems} for:item="hl">
+                  <div key={hl.id} class="hour-tick" style={hl.topStyle}>
+                    <span class="hour-label">{hl.label}</span>
+                  </div>
                 </template>
-                <template if:false={hasAgendaGroups}>
-                    <div class="slds-p-around_large slds-text-align_center">
-                        <p class="slds-text-color_weak slds-p-top_large">{label.noEventsInPeriod}</p>
-                    </div>
+              </div>
+              <div class="events-col" style={eventsColStyle}>
+                <template if:true={showCurrentTimeInCol0}>
+                  <div
+                    class="current-time-line"
+                    style={currentTimeLineStyle}
+                  ></div>
                 </template>
+                <template for:each={threeDayEventsCol0} for:item="evt">
+                  <div
+                    key={evt.Id}
+                    class="te-event"
+                    style={evt.positionStyle}
+                    role="button"
+                    tabindex="0"
+                    data-id={evt.Id}
+                    onclick={handleEventClick}
+                  >
+                    <span class="te-event-subject">{evt.Subject}</span>
+                  </div>
+                </template>
+              </div>
+              <div class="events-col" style={eventsColStyle}>
+                <template if:true={showCurrentTimeInCol1}>
+                  <div
+                    class="current-time-line"
+                    style={currentTimeLineStyle}
+                  ></div>
+                </template>
+                <template for:each={threeDayEventsCol1} for:item="evt">
+                  <div
+                    key={evt.Id}
+                    class="te-event"
+                    style={evt.positionStyle}
+                    role="button"
+                    tabindex="0"
+                    data-id={evt.Id}
+                    onclick={handleEventClick}
+                  >
+                    <span class="te-event-subject">{evt.Subject}</span>
+                  </div>
+                </template>
+              </div>
+              <div class="events-col" style={eventsColStyle}>
+                <template if:true={showCurrentTimeInCol2}>
+                  <div
+                    class="current-time-line"
+                    style={currentTimeLineStyle}
+                  ></div>
+                </template>
+                <template for:each={threeDayEventsCol2} for:item="evt">
+                  <div
+                    key={evt.Id}
+                    class="te-event"
+                    style={evt.positionStyle}
+                    role="button"
+                    tabindex="0"
+                    data-id={evt.Id}
+                    onclick={handleEventClick}
+                  >
+                    <span class="te-event-subject">{evt.Subject}</span>
+                  </div>
+                </template>
+              </div>
             </div>
-        </template>
-
-        <!-- ===== FAB ===== -->
-        <div class="fab-container">
-            <button class="fab-btn" aria-label={label.newEventAriaLabel} onclick={handleNewEvent}>
-                <lightning-icon
-                    icon-name="utility:add"
-                    size="small"
-                    variant="inverse"
-                    alternative-text={label.newEventAlt}
-                    class="fab-icon">
-                </lightning-icon>
-            </button>
+          </div>
         </div>
+      </template>
+
+      <!-- ===== Agenda View ===== -->
+      <template if:true={isAgendaView}>
+        <div class="agenda-scroll">
+          <template if:true={hasAgendaGroups}>
+            <template for:each={agendaGroups} for:item="group">
+              <div key={group.id}>
+                <div class={group.headerClass}>{group.label}</div>
+                <template for:each={group.events} for:item="evt">
+                  <div
+                    key={evt.Id}
+                    class="agenda-event"
+                    role="button"
+                    tabindex="0"
+                    data-id={evt.Id}
+                    onclick={handleEventClick}
+                  >
+                    <div
+                      class="agenda-event-color-bar"
+                      style={evt.colorBarStyle}
+                    ></div>
+                    <div class="agenda-event-time">{evt.timeLabel}</div>
+                    <div class="agenda-event-body">
+                      <p class="slds-text-body_regular slds-truncate">
+                        {evt.Subject}
+                      </p>
+                      <template if:true={evt.Location}>
+                        <p
+                          class="slds-text-body_small slds-text-color_weak slds-truncate"
+                        >
+                          {evt.Location}
+                        </p>
+                      </template>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </template>
+          <template if:false={hasAgendaGroups}>
+            <div class="slds-p-around_large slds-text-align_center">
+              <p class="slds-text-color_weak slds-p-top_large">
+                {label.noEventsInPeriod}
+              </p>
+            </div>
+          </template>
+        </div>
+      </template>
+
+      <!-- ===== FAB ===== -->
+      <div class="fab-container">
+        <button
+          class="fab-btn"
+          aria-label={label.newEventAriaLabel}
+          onclick={handleNewEvent}
+        >
+          <lightning-icon
+            icon-name="utility:add"
+            size="small"
+            variant="inverse"
+            alternative-text={label.newEventAlt}
+            class="fab-icon"
+          >
+          </lightning-icon>
+        </button>
+      </div>
     </div>
 
     <!-- ===== View Mode Popup ===== -->
     <template if:true={showViewModeMenu}>
-        <div class="bottom-sheet-overlay" onclick={handleViewModeMenuClose}></div>
-        <div class="bottom-sheet" role="dialog" aria-label={label.viewModeAriaLabel}>
-            <div class="bottom-sheet-handle" aria-hidden="true"></div>
-            <p class="sheet-title">{label.viewModeTitle}</p>
-            <div class="action-opts">
-                <button class={popupDayClass} data-mode="day" onclick={handleViewModeSelect}>{label.viewDay}</button>
-                <button class={popup3DayClass} data-mode="3day" onclick={handleViewModeSelect}>{label.view3Day}</button>
-                <button class={popupMonthClass} data-mode="month" onclick={handleViewModeSelect}>{label.viewMonth}</button>
-                <button class={popupAgendaClass} data-mode="agenda" onclick={handleViewModeSelect}>{label.viewAgenda}</button>
-            </div>
+      <div class="bottom-sheet-overlay" onclick={handleViewModeMenuClose}></div>
+      <div
+        class="bottom-sheet"
+        role="dialog"
+        aria-label={label.viewModeAriaLabel}
+      >
+        <div class="bottom-sheet-handle" aria-hidden="true"></div>
+        <p class="sheet-title">{label.viewModeTitle}</p>
+        <div class="action-opts">
+          <button
+            class={popupDayClass}
+            data-mode="day"
+            onclick={handleViewModeSelect}
+          >
+            {label.viewDay}
+          </button>
+          <button
+            class={popup3DayClass}
+            data-mode="3day"
+            onclick={handleViewModeSelect}
+          >
+            {label.view3Day}
+          </button>
+          <button
+            class={popupMonthClass}
+            data-mode="month"
+            onclick={handleViewModeSelect}
+          >
+            {label.viewMonth}
+          </button>
+          <button
+            class={popupAgendaClass}
+            data-mode="agenda"
+            onclick={handleViewModeSelect}
+          >
+            {label.viewAgenda}
+          </button>
         </div>
+      </div>
     </template>
 
     <!-- ===== User Panel ===== -->
     <template if:true={showUserPanel}>
-        <div class="bottom-sheet-overlay" onclick={handleCloseUserPanel}></div>
-        <div class={userPanelSheetClass} role="dialog" aria-labelledby="user-panel-heading">
-            <div class="sheet-drag-header"
-                 ontouchstart={handleSheetTouchStart}
-                 ontouchend={handleUserSheetTouchEnd}>
-                <div class="bottom-sheet-handle" aria-hidden="true"></div>
-                <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-p-horizontal_medium slds-p-top_x-small">
-                    <h3 id="user-panel-heading" class="slds-text-heading_small">{label.displayUsers}</h3>
-                    <lightning-button-icon
-                        icon-name="utility:close"
-                        variant="bare"
-                        alternative-text={label.close}
-                        onclick={handleCloseUserPanel}>
-                    </lightning-button-icon>
-                </div>
-            </div>
-            <div class="slds-p-horizontal_medium slds-p-top_x-small slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
-                <span class="slds-text-body_small slds-text-color_weak">{userSelectionLabel}</span>
-                <template if:true={atMaxUsers}>
-                    <span class="slds-text-body_small slds-text-color_error">{label.maxUsersReached}</span>
-                </template>
-            </div>
-            <div class="user-search-wrap slds-p-horizontal_medium slds-p-top_x-small">
-                <lightning-input
-                    type="search"
-                    label=""
-                    placeholder={label.searchPlaceholder}
-                    value={userSearchTerm}
-                    onchange={handleUserSearch}>
-                </lightning-input>
-            </div>
-            <div class="user-list">
-                <template if:true={hasAvailableCalendars}>
-                    <div class="panel-section-header">{label.sectionUsers}</div>
-                </template>
-                <template for:each={filteredUsersWithState} for:item="u">
-                    <div key={u.Id}
-                         class={u.rowClass}
-                         role="button"
-                         tabindex="0"
-                         data-id={u.Id}
-                         onclick={handleUserToggle}>
-                        <span class="user-color-dot" style={u.colorDotStyle}></span>
-                        <span class="user-name slds-truncate">{u.Name}</span>
-                        <template if:true={u.isSelected}>
-                            <lightning-icon
-                                icon-name="utility:check"
-                                size="x-small"
-                                class="user-check-icon">
-                            </lightning-icon>
-                        </template>
-                    </div>
-                </template>
-
-                <template if:true={hasAvailableCalendars}>
-                    <div class="panel-section-header">{label.sectionPublicResource}</div>
-                    <template for:each={filteredCalendarsWithState} for:item="cal">
-                        <div key={cal.Id}
-                             class={cal.rowClass}
-                             role="button"
-                             tabindex="0"
-                             data-id={cal.Id}
-                             onclick={handleUserToggle}>
-                            <span class="user-color-dot" style={cal.colorDotStyle}></span>
-                            <span class="user-name slds-truncate">{cal.Name}</span>
-                            <span class="cal-type-badge">{cal.typeLabel}</span>
-                            <template if:true={cal.isSelected}>
-                                <lightning-icon
-                                    icon-name="utility:check"
-                                    size="x-small"
-                                    class="user-check-icon">
-                                </lightning-icon>
-                            </template>
-                        </div>
-                    </template>
-                </template>
-            </div>
+      <div class="bottom-sheet-overlay" onclick={handleCloseUserPanel}></div>
+      <div
+        class={userPanelSheetClass}
+        role="dialog"
+        aria-labelledby="user-panel-heading"
+      >
+        <div
+          class="sheet-drag-header"
+          ontouchstart={handleSheetTouchStart}
+          ontouchend={handleUserSheetTouchEnd}
+        >
+          <div class="bottom-sheet-handle" aria-hidden="true"></div>
+          <div
+            class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-p-horizontal_medium slds-p-top_x-small"
+          >
+            <h3 id="user-panel-heading" class="slds-text-heading_small">
+              {label.displayUsers}
+            </h3>
+            <lightning-button-icon
+              icon-name="utility:close"
+              variant="bare"
+              alternative-text={label.close}
+              onclick={handleCloseUserPanel}
+            >
+            </lightning-button-icon>
+          </div>
         </div>
+        <div
+          class="slds-p-horizontal_medium slds-p-top_x-small slds-grid slds-grid_align-spread slds-grid_vertical-align-center"
+        >
+          <span class="slds-text-body_small slds-text-color_weak"
+            >{userSelectionLabel}</span
+          >
+          <template if:true={atMaxUsers}>
+            <span class="slds-text-body_small slds-text-color_error"
+              >{label.maxUsersReached}</span
+            >
+          </template>
+        </div>
+        <div
+          class="user-search-wrap slds-p-horizontal_medium slds-p-top_x-small"
+        >
+          <lightning-input
+            type="search"
+            label=""
+            placeholder={label.searchPlaceholder}
+            value={userSearchTerm}
+            onchange={handleUserSearch}
+          >
+          </lightning-input>
+        </div>
+        <div class="user-list">
+          <template if:true={hasAvailableCalendars}>
+            <div class="panel-section-header">{label.sectionUsers}</div>
+          </template>
+          <template for:each={filteredUsersWithState} for:item="u">
+            <div
+              key={u.Id}
+              class={u.rowClass}
+              role="button"
+              tabindex="0"
+              data-id={u.Id}
+              onclick={handleUserToggle}
+            >
+              <span class="user-color-dot" style={u.colorDotStyle}></span>
+              <span class="user-name slds-truncate">{u.Name}</span>
+              <template if:true={u.isSelected}>
+                <lightning-icon
+                  icon-name="utility:check"
+                  size="x-small"
+                  class="user-check-icon"
+                >
+                </lightning-icon>
+              </template>
+            </div>
+          </template>
+
+          <template if:true={hasAvailableCalendars}>
+            <div class="panel-section-header">
+              {label.sectionPublicResource}
+            </div>
+            <template for:each={filteredCalendarsWithState} for:item="cal">
+              <div
+                key={cal.Id}
+                class={cal.rowClass}
+                role="button"
+                tabindex="0"
+                data-id={cal.Id}
+                onclick={handleUserToggle}
+              >
+                <span class="user-color-dot" style={cal.colorDotStyle}></span>
+                <span class="user-name slds-truncate">{cal.Name}</span>
+                <span class="cal-type-badge">{cal.typeLabel}</span>
+                <template if:true={cal.isSelected}>
+                  <lightning-icon
+                    icon-name="utility:check"
+                    size="x-small"
+                    class="user-check-icon"
+                  >
+                  </lightning-icon>
+                </template>
+              </div>
+            </template>
+          </template>
+        </div>
+      </div>
     </template>
 
     <!-- ===== Day Panel Bottom Sheet (month view) ===== -->
     <template if:true={showDayPanel}>
-        <div class="bottom-sheet-overlay" onclick={handleOverlayClick}></div>
-        <div class={dayPanelSheetClass}
-             role="dialog"
-             aria-labelledby="day-panel-heading">
-            <div class="sheet-drag-header"
-                 ontouchstart={handleSheetTouchStart}
-                 ontouchend={handleSheetTouchEnd}>
-                <div class="bottom-sheet-handle" aria-hidden="true"></div>
-                <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-p-horizontal_medium slds-p-top_x-small">
-                    <h3 id="day-panel-heading" class="slds-text-heading_small">{selectedDateLabel}</h3>
-                    <lightning-button-icon
-                        icon-name="utility:close"
-                        variant="bare"
-                        alternative-text={label.close}
-                        onclick={handleCloseDayPanel}>
-                    </lightning-button-icon>
-                </div>
-            </div>
-            <div class="event-list slds-p-horizontal_medium slds-p-top_x-small">
-                <template if:true={hasSelectedDayEvents}>
-                    <template for:each={selectedDayEvents} for:item="evt">
-                        <div key={evt.Id}
-                             class="event-item slds-m-bottom_x-small"
-                             role="button"
-                             tabindex="0"
-                             data-id={evt.Id}
-                             onclick={handleEventClick}>
-                            <span class="event-color-bar" style={evt.colorBarStyle}></span>
-                            <div class="event-item-body">
-                                <p class="slds-text-body_regular slds-truncate">{evt.Subject}</p>
-                                <p class="slds-text-body_small slds-text-color_weak">{evt.timeLabel}</p>
-                            </div>
-                        </div>
-                    </template>
-                </template>
-                <template if:false={hasSelectedDayEvents}>
-                    <p class="slds-text-body_regular slds-text-color_weak slds-text-align_center slds-p-vertical_medium">
-                        {label.noEventsOnDay}
-                    </p>
-                </template>
-            </div>
-            <div class="slds-p-horizontal_medium slds-p-bottom_small slds-grid slds-grid_align-spread" style="gap:8px">
-                <lightning-button
-                    label={label.openDayView}
-                    icon-name="utility:date_input"
-                    class="slds-size_1-of-2"
-                    onclick={handleViewDayForSelectedDate}>
-                </lightning-button>
-                <lightning-button
-                    label={label.create}
-                    icon-name="utility:add"
-                    variant="brand"
-                    class="slds-size_1-of-2"
-                    onclick={handleNewEventForSelectedDate}>
-                </lightning-button>
-            </div>
+      <div class="bottom-sheet-overlay" onclick={handleOverlayClick}></div>
+      <div
+        class={dayPanelSheetClass}
+        role="dialog"
+        aria-labelledby="day-panel-heading"
+      >
+        <div
+          class="sheet-drag-header"
+          ontouchstart={handleSheetTouchStart}
+          ontouchend={handleSheetTouchEnd}
+        >
+          <div class="bottom-sheet-handle" aria-hidden="true"></div>
+          <div
+            class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-p-horizontal_medium slds-p-top_x-small"
+          >
+            <h3 id="day-panel-heading" class="slds-text-heading_small">
+              {selectedDateLabel}
+            </h3>
+            <lightning-button-icon
+              icon-name="utility:close"
+              variant="bare"
+              alternative-text={label.close}
+              onclick={handleCloseDayPanel}
+            >
+            </lightning-button-icon>
+          </div>
         </div>
+        <div class="event-list slds-p-horizontal_medium slds-p-top_x-small">
+          <template if:true={hasSelectedDayEvents}>
+            <template for:each={selectedDayEvents} for:item="evt">
+              <div
+                key={evt.Id}
+                class="event-item slds-m-bottom_x-small"
+                role="button"
+                tabindex="0"
+                data-id={evt.Id}
+                onclick={handleEventClick}
+              >
+                <span class="event-color-bar" style={evt.colorBarStyle}></span>
+                <div class="event-item-body">
+                  <p class="slds-text-body_regular slds-truncate">
+                    {evt.Subject}
+                  </p>
+                  <p class="slds-text-body_small slds-text-color_weak">
+                    {evt.timeLabel}
+                  </p>
+                </div>
+              </div>
+            </template>
+          </template>
+          <template if:false={hasSelectedDayEvents}>
+            <p
+              class="slds-text-body_regular slds-text-color_weak slds-text-align_center slds-p-vertical_medium"
+            >
+              {label.noEventsOnDay}
+            </p>
+          </template>
+        </div>
+        <div
+          class="slds-p-horizontal_medium slds-p-bottom_small slds-grid slds-grid_align-spread"
+          style="gap: 8px"
+        >
+          <lightning-button
+            label={label.openDayView}
+            icon-name="utility:date_input"
+            class="slds-size_1-of-2"
+            onclick={handleViewDayForSelectedDate}
+          >
+          </lightning-button>
+          <lightning-button
+            label={label.create}
+            icon-name="utility:add"
+            variant="brand"
+            class="slds-size_1-of-2"
+            onclick={handleNewEventForSelectedDate}
+          >
+          </lightning-button>
+        </div>
+      </div>
     </template>
 
     <!-- ===== Loading Spinner ===== -->
     <template if:true={isLoading}>
-        <div class="spinner-overlay">
-            <lightning-spinner alternative-text={label.loading} size="medium"></lightning-spinner>
-        </div>
+      <div class="spinner-overlay">
+        <lightning-spinner
+          alternative-text={label.loading}
+          size="medium"
+        ></lightning-spinner>
+      </div>
     </template>
+  </template>
 </template>
