@@ -16,20 +16,6 @@
                 <supportedFormFactor type="Small" />
                 <supportedFormFactor type="Large" />
             </supportedFormFactors>
-            <property
-        name="workStartHour"
-        type="Integer"
-        default="9"
-        label="{!$Label.c.PhoneCal_WorkStartHour}"
-        description="{!$Label.c.PhoneCal_WorkStartHourDesc}"
-      />
-            <property
-        name="workEndHour"
-        type="Integer"
-        default="18"
-        label="{!$Label.c.PhoneCal_WorkEndHour}"
-        description="{!$Label.c.PhoneCal_WorkEndHourDesc}"
-      />
         </targetConfig>
 
     </targetConfigs>

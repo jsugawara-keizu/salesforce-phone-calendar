@@ -457,6 +457,45 @@ private class PhoneCalendarControllerTest {
     );
   }
 
+  // ─── getUserWorkHours ──────────────────────────────────────────────────────
+
+  @isTest
+  static void getUserWorkHours_returnsDefaultsWhenFieldsBlank() {
+    // StartDay / EndDay が未設定のユーザーはデフォルト値（9 / 18）を返す
+    Test.startTest();
+    Map<String, Integer> result = PhoneCalendarController.getUserWorkHours();
+    Test.stopTest();
+
+    System.assertNotEquals(null, result, 'Result should not be null');
+    System.assert(
+      result.containsKey('startHour'),
+      'Result should contain startHour'
+    );
+    System.assert(
+      result.containsKey('endHour'),
+      'Result should contain endHour'
+    );
+  }
+
+  @isTest
+  static void getUserWorkHours_parsesPicklistValues() {
+    // StartDay = "10"（9:00）、EndDay = "19"（18:00）に設定したユーザーで実行
+    User u = buildUser('WorkHoursUser');
+    u.StartDay = '10'; // 9:00
+    u.EndDay = '19'; // 18:00
+    insert u;
+
+    Map<String, Integer> result;
+    System.runAs(u) {
+      Test.startTest();
+      result = PhoneCalendarController.getUserWorkHours();
+      Test.stopTest();
+    }
+
+    System.assertEquals(9, result.get('startHour'), 'startHour should be 9');
+    System.assertEquals(18, result.get('endHour'), 'endHour should be 18');
+  }
+
   @isTest
   static void createEvent_endBeforeStartDefaultsTo60Minutes() {
     // endDateTime が startDateTime より前 → durationMins <= 0 → 60 にフォールバック
