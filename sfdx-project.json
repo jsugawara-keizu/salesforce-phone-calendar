@@ -5,7 +5,7 @@
       "default": true,
       "package": "PhoneCalendar",
       "versionName": "Initial Release",
-      "versionNumber": "1.0.0.NEXT",
+      "versionNumber": "1.1.0.NEXT",
       "definitionFile": "config/project-scratch-def.json"
     }
   ],

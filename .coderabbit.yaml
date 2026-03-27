@@ -1,0 +1,43 @@
+# CodeRabbit configuration — https://docs.coderabbit.ai
+
+language: "ja"
+tone_instructions: "技術的かつ簡潔に。Salesforce LWC / Apex のベストプラクティスを踏まえてレビューしてください。"
+
+reviews:
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  auto_review:
+    enabled: true
+    drafts: false
+  path_instructions:
+    - path: "force-app/main/default/lwc/**"
+      instructions: |
+        Salesforce Mobile App（iPhone）向け LWC コンポーネントです。以下の観点でレビューしてください：
+        - SLDS 2 準拠（CSS カスタムプロパティ `--slds-g-*` 使用、ハードコードカラー禁止）
+        - アクセシビリティ（ARIA ロール・ラベル、キーボード操作、フォーカス管理）
+        - モバイルパフォーマンス（renderedCallback 内でのループや DOM 操作に注意）
+        - LWC ベストプラクティス（@wire vs 命令型の使い分け、リアクティブプロパティの適切な管理）
+        - i18n：ユーザー向け文字列はすべて Custom Labels（`@salesforce/label/c.*`）と Intl.DateTimeFormat を使用
+        - XSS・インジェクションリスクの確認
+    - path: "force-app/main/default/classes/**"
+      instructions: |
+        Salesforce Apex クラスです。以下の観点でレビューしてください：
+        - CRUD / FLS の適用状況（または without sharing の正当性）
+        - ガバナー制限（SOQL / DML のループ内実行禁止）
+        - AuraEnabled メソッド：読み取りは cacheable=true、DML は命令型呼び出し
+        - テストクラスは別ファイルで作成し、網羅率 75% 以上を目標
+    - path: ".github/workflows/**"
+      instructions: |
+        GitHub Actions ワークフローです。以下を確認してください：
+        - シークレットの誤った露出がないか
+        - サードパーティ Action のバージョン固定（`@vX.Y.Z` または SHA ピン）
+        - 最小権限原則（不要な write 権限を付与していないか）
+    - path: "force-app/main/default/labels/**"
+      instructions: |
+        Custom Labels ファイルです。新規ラベルには en_US 翻訳ファイルへの対応エントリがあることを確認してください。
+
+chat:
+  auto_reply: true
