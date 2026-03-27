@@ -1,4 +1,4 @@
-import { LightningElement, api, track, wire } from "lwc";
+import { LightningElement, track, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { CurrentPageReference } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
@@ -10,6 +10,7 @@ import getCalendarPreference from "@salesforce/apex/PhoneCalendarController.getC
 import getEventsForMonth from "@salesforce/apex/PhoneCalendarController.getEventsForMonth";
 import getPublicCalendars from "@salesforce/apex/PhoneCalendarController.getPublicCalendars";
 import saveCalendarPreference from "@salesforce/apex/PhoneCalendarController.saveCalendarPreference";
+import getUserWorkHours from "@salesforce/apex/PhoneCalendarController.getUserWorkHours";
 import labelAgendaSuffix from "@salesforce/label/c.PhoneCal_AgendaSuffix";
 import labelAllDay from "@salesforce/label/c.PhoneCal_AllDay";
 import labelClose from "@salesforce/label/c.PhoneCal_Close";
@@ -105,9 +106,9 @@ export default class PhoneCalendar extends NavigationMixin(LightningElement) {
   // ── View mode popup ──────────────────────────────────────────────────────────
   @track showViewModeMenu = false;
 
-  // ── Public API ───────────────────────────────────────────────────────────────
-  @api workStartHour = 9;
-  @api workEndHour = 18;
+  // ── Work hours (fetched from User.StartDay / User.EndDay) ───────────────────
+  workStartHour = 9;
+  workEndHour = 18;
 
   // ── i18n ─────────────────────────────────────────────────────────────────────
   locale = LOCALE;
@@ -680,6 +681,15 @@ export default class PhoneCalendar extends NavigationMixin(LightningElement) {
         evt.preventDefault();
       }
     };
+
+    getUserWorkHours()
+      .then((result) => {
+        this.workStartHour = result.startHour;
+        this.workEndHour = result.endHour;
+      })
+      .catch(() => {
+        // デフォルト値（9 / 18）をそのまま使用
+      });
 
     getCalendarPreference()
       .then((result) => {
