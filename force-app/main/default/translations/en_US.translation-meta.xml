@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customLabels>
+        <name>PhoneCal_AgendaSuffix</name>
+        <label> onward</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_AllDay</name>
+        <label>All day</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_Close</name>
+        <label>Close</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_Create</name>
+        <label>New Event</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_DateRangeSep</name>
+        <label> – </label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_DisplayUsers</name>
+        <label>Display Users</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_Error</name>
+        <label>Error</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_ErrorLoad</name>
+        <label>Failed to load events</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_Hours</name>
+        <label>hr</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_Loading</name>
+        <label>Loading</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_MaxUsersReached</name>
+        <label>Maximum reached</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_Minutes</name>
+        <label>min</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_NewEventAlt</name>
+        <label>New event</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_NewEventAriaLabel</name>
+        <label>Create new event</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_NextPeriod</name>
+        <label>Next</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_NoEventsInPeriod</name>
+        <label>No events in this period</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_NoEventsOnDay</name>
+        <label>No events</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_OpenDayView</name>
+        <label>Open Day View</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_PrevPeriod</name>
+        <label>Previous</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_SearchPlaceholder</name>
+        <label>Search users...</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_SectionPublicResource</name>
+        <label>Public &amp; Resource</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_SectionUsers</name>
+        <label>Users</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_SelectedSuffix</name>
+        <label>selected</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_Today</name>
+        <label>Today</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_TypePublic</name>
+        <label>Public</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_TypeResource</name>
+        <label>Resource</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_UserSelectAriaLabel</name>
+        <label>Select users</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_View3Day</name>
+        <label>3 Days</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_View3DayBadge</name>
+        <label>3D</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_ViewAgenda</name>
+        <label>Agenda</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_ViewDay</name>
+        <label>Day</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_ViewModeAriaLabel</name>
+        <label>Select view mode</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_ViewModeTitle</name>
+        <label>View</label>
+    </customLabels>
+    <customLabels>
+        <name>PhoneCal_ViewMonth</name>
+        <label>Month</label>
+    </customLabels>
+</Translations>

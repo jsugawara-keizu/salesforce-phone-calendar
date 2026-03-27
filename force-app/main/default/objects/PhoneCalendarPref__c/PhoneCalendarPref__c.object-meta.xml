@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Stores per-user calendar display preferences for the phoneCalendar LWC.</description>
+    <enableFeeds>false</enableFeeds>
+    <label>Phone Calendar Preference</label>
+    <visibility>Public</visibility>
+</CustomObject>

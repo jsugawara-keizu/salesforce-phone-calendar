@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__Tab</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__RecordPage,lightning__HomePage">
+            <supportedFormFactors>
+                <supportedFormFactor type="Small"/>
+                <supportedFormFactor type="Large"/>
+            </supportedFormFactors>
+            <property name="workStartHour" type="Integer" default="9" label="始業時刻（時）" description="業務時間外の背景色を適用する開始時刻（0〜23）"/>
+            <property name="workEndHour"   type="Integer" default="18" label="終業時刻（時）" description="業務時間外の背景色を適用する終了時刻（0〜23）"/>
+        </targetConfig>
+
+    </targetConfigs>
+</LightningComponentBundle>

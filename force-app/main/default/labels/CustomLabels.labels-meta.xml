@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>PhoneCal_AgendaSuffix</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Agenda period suffix</shortDescription>
+        <value>〜</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_AllDay</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>All-day event label</shortDescription>
+        <value>終日</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_Close</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Close button label</shortDescription>
+        <value>閉じる</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_Create</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Create event button</shortDescription>
+        <value>作成</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_DateRangeSep</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Date range separator for 3-day header</shortDescription>
+        <value> 〜 </value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_DisplayUsers</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>User panel heading</shortDescription>
+        <value>表示ユーザー</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_Error</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Toast error title</shortDescription>
+        <value>エラー</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_ErrorLoad</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Event load failure message</shortDescription>
+        <value>イベントの取得に失敗しました</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_Hours</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Hour unit for duration</shortDescription>
+        <value>時間</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_Loading</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Spinner alternative text</shortDescription>
+        <value>読み込み中</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_MaxUsersReached</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Max user selection warning</shortDescription>
+        <value>上限に達しました</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_Minutes</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Minute unit for duration</shortDescription>
+        <value>分</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_NewEventAlt</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>FAB icon alternative text</shortDescription>
+        <value>新規イベント</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_NewEventAriaLabel</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>FAB button aria-label</shortDescription>
+        <value>新規イベントを作成</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_NextPeriod</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Next period navigation button aria-label</shortDescription>
+        <value>次へ</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_NoEventsInPeriod</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Agenda empty state message</shortDescription>
+        <value>この期間にイベントはありません</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_NoEventsOnDay</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Day panel empty state message</shortDescription>
+        <value>イベントはありません</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_OpenDayView</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Open day view button</shortDescription>
+        <value>日表示で開く</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_PrevPeriod</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Previous period navigation button aria-label</shortDescription>
+        <value>前へ</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_SearchPlaceholder</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>User search input placeholder</shortDescription>
+        <value>ユーザーを検索...</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_SectionPublicResource</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Public and resource calendar section header</shortDescription>
+        <value>公開＆リソース</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_SectionUsers</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Users section header in user panel</shortDescription>
+        <value>ユーザー</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_SelectedSuffix</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Selection count suffix in user panel</shortDescription>
+        <value>件選択中</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_Today</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Today button and agenda date prefix</shortDescription>
+        <value>今日</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_TypePublic</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Public calendar type badge</shortDescription>
+        <value>公開</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_TypeResource</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Resource calendar type badge</shortDescription>
+        <value>リソース</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_UserSelectAriaLabel</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>User panel open button aria-label</shortDescription>
+        <value>ユーザー選択</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_View3Day</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>3-day view mode button label</shortDescription>
+        <value>3日間</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_View3DayBadge</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>3-day view mode badge (compact)</shortDescription>
+        <value>3日</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_ViewAgenda</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Agenda view mode button label</shortDescription>
+        <value>議題</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_ViewDay</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Day view mode button label</shortDescription>
+        <value>日</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_ViewModeAriaLabel</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>View mode dialog aria-label</shortDescription>
+        <value>表示形式を選択</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_ViewModeTitle</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>View mode popup title</shortDescription>
+        <value>表示形式</value>
+    </labels>
+    <labels>
+        <fullName>PhoneCal_ViewMonth</fullName>
+        <language>ja</language>
+        <protected>false</protected>
+        <shortDescription>Month view mode button label</shortDescription>
+        <value>月</value>
+    </labels>
+</CustomLabels>
