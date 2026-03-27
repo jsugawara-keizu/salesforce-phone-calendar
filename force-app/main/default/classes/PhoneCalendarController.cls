@@ -159,6 +159,33 @@ public without sharing class PhoneCalendarController {
   }
 
   /**
+   * @description Returns the running user's work start and end hours
+   *              derived from the User.StartDay / User.EndDay picklist fields.
+   *              Picklist value N represents hour N-1 (e.g. "7" → 6:00).
+   *              Defaults to 9 / 18 when fields are not set.
+   * @return Map with keys startHour and endHour (Integer)
+   */
+  @AuraEnabled(cacheable=true)
+  public static Map<String, Integer> getUserWorkHours() {
+    User u = [
+      SELECT StartDay, EndDay
+      FROM User
+      WHERE Id = :UserInfo.getUserId()
+      LIMIT 1
+    ];
+    Integer startHour = String.isNotBlank(u.StartDay)
+      ? Integer.valueOf(u.StartDay) - 1
+      : 9;
+    Integer endHour = String.isNotBlank(u.EndDay)
+      ? Integer.valueOf(u.EndDay) - 1
+      : 18;
+    return new Map<String, Integer>{
+      'startHour' => startHour,
+      'endHour' => endHour
+    };
+  }
+
+  /**
    * @description Creates a new Event record from the provided input wrapper.
    * @param input EventInput wrapper
    * @return Id of the newly created Event
