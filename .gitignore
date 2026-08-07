@@ -30,6 +30,9 @@ node_modules/
 # Eslint cache
 .eslintcache
 
+# IDE settings
+.vscode/
+
 # MacOS system files
 .DS_Store
 
