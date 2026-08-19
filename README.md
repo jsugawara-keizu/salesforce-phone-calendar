@@ -1,5 +1,7 @@
 # PhoneCalendar — Salesforce Mobile App 向けカレンダー LWC
 
+An iPhone-optimized Lightning Web Component calendar for Salesforce Mobile App with month/day/3-day/agenda views, multi-user and public/resource calendar support, and i18n.
+
 月・日・3日間・議題 の4ビューを持つ、iPhone（Salesforce Mobile App）最適化カレンダーコンポーネント。
 複数ユーザー・公開／リソースカレンダーの横断表示、日跨ぎイベント、i18n 対応（日本語 / 英語）。
 
