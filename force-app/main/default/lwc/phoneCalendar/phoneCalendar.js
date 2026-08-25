@@ -309,7 +309,7 @@ export default class PhoneCalendar extends NavigationMixin(LightningElement) {
     const endPx = this.workEndHour * HOUR_HEIGHT_PX;
     const offColor = "rgba(0,0,0,0.06)";
     const offGrad = `linear-gradient(to bottom, ${offColor} ${startPx}px, transparent ${startPx}px, transparent ${endPx}px, ${offColor} ${endPx}px)`;
-    const hrGrad = `repeating-linear-gradient(to bottom, transparent 0px, transparent 59px, var(--slds-g-color-border-base-1, #e5e5e5) 59px, var(--slds-g-color-border-base-1, #e5e5e5) 60px)`;
+    const hrGrad = `repeating-linear-gradient(to bottom, transparent 0px, transparent 59px, var(--slds-g-color-border-1, #e5e5e5) 59px, var(--slds-g-color-border-1, #e5e5e5) 60px)`;
     return `height: ${TIME_GRID_TOTAL_PX}px; position: relative; background-image: ${offGrad}, ${hrGrad}; background-size: 100% 100%, 100% 60px;`;
   }
 
