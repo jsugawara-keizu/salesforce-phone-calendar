@@ -124,13 +124,13 @@
 }
 
 .calendar-row {
-  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
 }
 
 .day-cell {
   flex: 1;
   min-height: 60px;
-  border-right: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-right: 1px solid var(--slds-g-color-border-1, #e5e5e5);
   padding: 4px 2px;
   cursor: pointer;
   display: flex;
@@ -159,7 +159,7 @@
 }
 
 .day-cell_sun .day-number {
-  color: var(--slds-g-color-feedback-base-error-50, #c23934);
+  color: var(--slds-g-color-error-base-40, #c23934);
 }
 .day-cell_sat .day-number {
   color: var(--slds-g-color-brand-base-50, #0176d3);
@@ -220,7 +220,7 @@
   flex-shrink: 0;
   position: relative;
   height: 1440px;
-  border-right: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-right: 1px solid var(--slds-g-color-border-1, #e5e5e5);
 }
 
 .hour-tick {
@@ -246,7 +246,7 @@
   flex: 1;
   position: relative;
   min-width: 0;
-  border-right: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-right: 1px solid var(--slds-g-color-border-1, #e5e5e5);
 }
 
 .events-col:last-child {
@@ -305,7 +305,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: var(--slds-g-color-feedback-base-error-50, #c23934);
+  background: var(--slds-g-color-error-base-40, #c23934);
   z-index: 5;
   pointer-events: none;
 }
@@ -318,7 +318,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--slds-g-color-feedback-base-error-50, #c23934);
+  background: var(--slds-g-color-error-base-40, #c23934);
 }
 
 /* ===== All-day Bar ===== */
@@ -326,7 +326,7 @@
   display: flex;
   align-items: flex-start;
   background: var(--slds-g-color-neutral-base-98, #fafafa);
-  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
   padding: 4px 0;
   flex-shrink: 0;
 }
@@ -346,7 +346,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2px;
-  border-left: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-left: 1px solid var(--slds-g-color-border-1, #e5e5e5);
   min-width: 0;
 }
 
@@ -371,7 +371,7 @@
 
 .three-day-header {
   flex-shrink: 0;
-  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
   background: var(--slds-g-color-neutral-base-100, #ffffff);
 }
 
@@ -386,7 +386,7 @@
   flex-direction: column;
   align-items: center;
   padding: 4px 2px;
-  border-left: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-left: 1px solid var(--slds-g-color-border-1, #e5e5e5);
 }
 
 .date-col-header_today {
@@ -434,7 +434,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
 }
 
 .agenda-date-header_today {
@@ -446,7 +446,7 @@
   display: flex;
   align-items: stretch;
   min-height: 52px;
-  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
   cursor: pointer;
   background: var(--slds-g-color-neutral-base-100, #ffffff);
   -webkit-tap-highlight-color: transparent;
@@ -614,7 +614,7 @@
   padding: 12px 20px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
 }
 
 .user-row:active {
@@ -638,7 +638,7 @@
   background: var(--slds-g-color-neutral-base-95, #f3f3f3);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border-bottom: 1px solid var(--slds-g-color-border-1, #e5e5e5);
 }
 
 .cal-type-badge {
@@ -682,7 +682,7 @@
   display: flex;
   align-items: stretch;
   background: var(--slds-g-color-neutral-base-100, #ffffff);
-  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+  border: 1px solid var(--slds-g-color-border-1, #e5e5e5);
   border-radius: 6px;
   overflow: hidden;
   cursor: pointer;
